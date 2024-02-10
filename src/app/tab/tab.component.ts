@@ -1,4 +1,5 @@
-import { Component, signal, input } from '@angular/core';
+import { Component, signal, input, inject } from '@angular/core';
+import { TabService } from '../tabbed-pane/svc';
 
 @Component({
   selector: 'app-tab',
@@ -8,6 +9,9 @@ import { Component, signal, input } from '@angular/core';
   styleUrl: './tab.component.css'
 })
 export class TabComponent {
-  visible = signal(true);
+  tabService = inject(TabService);
+  visible(): boolean {
+    return this.tabService.isVisible(this);
+  }
   title = input();
 }
